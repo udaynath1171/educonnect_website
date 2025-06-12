@@ -10,15 +10,33 @@
   </head>
   <body>
     <div id="root"></div>
-  
-<!-- App Demo Video -->
-<section style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 1rem;">
-  <h2 style="margin-bottom: 1rem; text-align: center;">See EduConnect in Action</h2>
-  <video width="480" autoplay muted playsinline controls style="border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
-    <source src="assets/Video.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</section>
 
-</body>
+    <!-- 📺 Floating Mini Video -->
+    <div id="floating-video" style="
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 200px;
+      background: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      z-index: 9999;
+      overflow: hidden;
+    ">
+      <div style="text-align: right; background: #f9f9f9; padding: 4px;">
+        <button onclick="document.getElementById('floating-video').style.display='none'" style="
+          background: none;
+          border: none;
+          font-size: 16px;
+          cursor: pointer;
+        ">✖</button>
+      </div>
+      <video autoplay muted playsinline controls style="width: 100%; display: block;">
+        <source src="assets/Video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+  </body>
 </html>
