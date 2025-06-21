@@ -26,7 +26,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -38,22 +38,40 @@
                         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
                     },
                     colors: {
-                        blue: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
                         },
+                        secondary: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
                     },
                     animation: {
-                        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                        'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                        'large': '0 10px 40px -10px rgba(0, 0, 0, 0.15), 0 2px 10px -2px rgba(0, 0, 0, 0.04)',
+                    }
                 },
             },
         }
@@ -61,51 +79,70 @@
     
     <!-- Custom CSS -->
     <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
         @layer components {
+            .container-main {
+                @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+            }
+            
+            .section-spacing {
+                @apply py-16 sm:py-20 lg:py-24;
+            }
+            
             .btn-primary {
-                @apply bg-gradient-to-r from-blue-600 via-blue-500 to-teal-400 hover:from-blue-700 hover:to-teal-500 text-white font-bold py-3 px-10 rounded-full text-lg shadow-xl hover:shadow-2xl transition-all duration-300 tracking-wide uppercase ring-2 ring-blue-200 hover:ring-blue-400;
-                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+                @apply inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 rounded-xl shadow-medium hover:shadow-large transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary-500/20;
             }
             
             .btn-secondary {
-                @apply bg-white hover:bg-gray-50 text-blue-600 font-medium py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-600;
+                @apply inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-primary-700 bg-white border-2 border-primary-200 hover:border-primary-300 rounded-xl shadow-soft hover:shadow-medium transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary-500/20;
             }
             
             .card {
-                @apply bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border border-blue-100;
-                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+                @apply bg-white rounded-2xl shadow-soft hover:shadow-medium transition-all duration-300 border border-gray-100;
             }
             
-            .section-padding {
-                @apply py-20;
+            .card-hover {
+                @apply transform hover:-translate-y-2 hover:shadow-large;
             }
             
-            .container-custom {
-                @apply container mx-auto px-4;
+            .glass-card {
+                @apply bg-white/80 backdrop-blur-xl rounded-2xl shadow-medium border border-white/20;
             }
-        }
-        
-        @layer utilities {
-            .text-gradient {
-                background: linear-gradient(90deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
+            
+            .form-input {
+                @apply w-full px-4 py-3 text-gray-900 bg-white border border-gray-300 rounded-xl focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-200 placeholder-gray-500;
             }
-            .glass {
-                background: rgba(255,255,255,0.7);
-                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
-                backdrop-filter: blur(12px);
-                border-radius: 1.5rem;
-                border: 1px solid rgba(255,255,255,0.18);
+            
+            .form-input.error {
+                @apply border-red-500 focus:ring-red-500/20 focus:border-red-500;
             }
-            .fade-in {
-                opacity: 0;
-                animation: fadeInUp 1s ease forwards;
+            
+            .error-message {
+                @apply text-red-600 text-sm mt-2 font-medium;
             }
-            @keyframes fadeInUp {
-                0% { opacity: 0; transform: translateY(40px); }
-                100% { opacity: 1; transform: translateY(0); }
+            
+            .success-message {
+                display: none;
+            }
+            
+            .success-message.show {
+                display: block;
+            }
+            
+            .form-container.hide {
+                display: none;
+            }
+            
+            .gradient-text {
+                @apply bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent;
+            }
+            
+            .section-divider {
+                @apply w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent;
             }
         }
         
@@ -119,186 +156,175 @@
                 sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            background: linear-gradient(135deg, #e0e7ff 0%, #f0fdfa 100%);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            color: #1e293b;
         }
         
-        /* Custom animations */
-        .animate-pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
         }
         
-        @keyframes pulse {
-            50% {
-                opacity: .5;
-            }
-        }
-        
-        /* Form validation styles */
-        .form-input {
-            @apply w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white/80 backdrop-blur-lg;
-        }
-        
-        .form-input.error {
-            @apply border-red-500;
-        }
-        
-        .error-message {
-            @apply text-red-500 text-sm mt-1;
-        }
-        
-        /* Success message styles */
-        .success-message {
-            display: none;
-        }
-        
-        .success-message.show {
-            display: block;
-        }
-        
-        .form-container.hide {
-            display: none;
-        }
-        
-        /* Wavy SVG divider utility */
-        .wavy-divider {
-            display: block;
-            width: 100%;
-            height: 60px;
-            margin-top: -1px;
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
     </style>
 </head>
 <body>
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-blue-50 to-blue-100 overflow-hidden">
-        <div class="container-custom py-16 md:py-24 lg:py-28">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
-                <!-- Left Content -->
-                <div class="flex-1 space-y-6 text-center lg:text-left">
-                    <!-- Early Access Badge -->
-                    <div class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800 border border-blue-200 mb-4">
-                        <span class="animate-pulse mr-2">●</span>
-                        Now in Early Access
-                    </div>
-                    
-                    <!-- Main Heading -->
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                        Keep Parents in the Loop—Without the Extra Work
-                    </h1>
-                    
-                    <!-- Subtitle -->
-                    <p class="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto lg:mx-0">
-                        EduConnect uses WhatsApp (and SMS fallback) so teachers send Attendance, Assignment & Announcement alerts in seconds—no parent app needed.
-                    </p>
-                    
-                    <!-- CTA Button -->
-                    <div class="pt-4">
-                        <a href="#early-access" class="btn-primary inline-flex items-center group">
-                            Get Early Access
-                            <svg class="ml-2 group-hover:translate-x-1 transition-transform duration-300" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12,5 19,12 12,19"></polyline>
-                            </svg>
-                        </a>
-                        <p class="text-sm text-gray-500 mt-3">
-                            Limited spots available for 2025 school year
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Right Content - Demo Card -->
-                <div class="flex-1 relative">
-                    <div class="relative z-10 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
-                        <!-- Header -->
-                        <div class="bg-blue-600 text-white p-4">
-                            <div class="flex items-center">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                </svg>
-                                <span class="ml-2 font-medium">EduConnect</span>
-                            </div>
+    <section class="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50">
+        <!-- Background Decorations -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float" style="animation-delay: -2s;"></div>
+            <div class="absolute top-40 left-1/2 w-60 h-60 bg-primary-300 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-float" style="animation-delay: -4s;"></div>
+        </div>
+        
+        <div class="container-main section-spacing relative z-10">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <!-- Left Content -->
+                    <div class="text-center lg:text-left space-y-8">
+                        <!-- Early Access Badge -->
+                        <div class="inline-flex items-center px-4 py-2 bg-primary-100 text-primary-800 rounded-full text-sm font-semibold border border-primary-200">
+                            <span class="w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse-slow"></span>
+                            Now in Early Access
                         </div>
                         
-                        <!-- Messages -->
-                        <div class="p-6 space-y-6">
-                            <!-- Attendance Alert -->
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <div class="flex items-start gap-3">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 mt-1">
-                                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-                                    </svg>
-                                    <div>
-                                        <p class="font-medium text-gray-800">Attendance Alert</p>
-                                        <p class="text-sm text-gray-600 mt-1">
-                                            Emma was marked absent today in Math class. Please reply if this was planned.
-                                        </p>
-                                        <p class="text-xs text-gray-400 mt-2">
-                                            Sent via WhatsApp • 9:15 AM
-                                        </p>
+                        <!-- Main Heading -->
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                            <span class="gradient-text">Keep Parents in the Loop</span>
+                            <br>
+                            <span class="text-gray-900">Without the Extra Work</span>
+                        </h1>
+                        
+                        <!-- Subtitle -->
+                        <p class="text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            EduConnect uses WhatsApp (and SMS fallback) so teachers send Attendance, Assignment & Announcement alerts in seconds—no parent app needed.
+                        </p>
+                        
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="#early-access" class="btn-primary">
+                                Get Early Access
+                                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                            </a>
+                            <a href="#how-it-works" class="btn-secondary">
+                                See How It Works
+                            </a>
+                        </div>
+                        
+                        <!-- Trust Indicators -->
+                        <div class="pt-4">
+                            <p class="text-sm text-gray-500">
+                                Limited spots available for 2025 school year
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Content - Demo Card -->
+                    <div class="relative">
+                        <div class="glass-card p-8 max-w-md mx-auto">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                        </svg>
                                     </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">EduConnect</h3>
+                                        <p class="text-sm text-gray-500">Online</p>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
                                 </div>
                             </div>
                             
-                            <!-- Assignment Due -->
-                            <div class="bg-orange-50 rounded-lg p-4">
-                                <div class="flex items-start gap-3">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600 mt-1">
-                                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-                                    </svg>
-                                    <div>
-                                        <p class="font-medium text-gray-800">Assignment Due</p>
-                                        <p class="text-sm text-gray-600 mt-1">
-                                            Science project on Ecosystems due this Friday. Details sent in email.
-                                        </p>
-                                        <p class="text-xs text-gray-400 mt-2">
-                                            Sent via WhatsApp • Yesterday
-                                        </p>
+                            <!-- Messages -->
+                            <div class="space-y-4">
+                                <!-- Attendance Alert -->
+                                <div class="bg-primary-50 rounded-2xl p-4 border border-primary-100">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19h6a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-semibold text-gray-900 text-sm">Attendance Alert</p>
+                                            <p class="text-gray-600 text-sm mt-1">
+                                                Emma was marked absent today in Math class. Please reply if this was planned.
+                                            </p>
+                                            <p class="text-xs text-gray-400 mt-2">
+                                                Sent via WhatsApp • 9:15 AM
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <!-- Class Announcement -->
-                            <div class="bg-teal-50 rounded-lg p-4">
-                                <div class="flex items-start gap-3">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600 mt-1">
-                                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-                                    </svg>
-                                    <div>
-                                        <p class="font-medium text-gray-800">Class Announcement</p>
-                                        <p class="text-sm text-gray-600 mt-1">
-                                            Field trip forms due by Monday. Please return signed permission slip.
-                                        </p>
-                                        <p class="text-xs text-gray-400 mt-2">
-                                            Sent via WhatsApp • 2 days ago
-                                        </p>
+                                
+                                <!-- Assignment Due -->
+                                <div class="bg-orange-50 rounded-2xl p-4 border border-orange-100">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-semibold text-gray-900 text-sm">Assignment Due</p>
+                                            <p class="text-gray-600 text-sm mt-1">
+                                                Science project on Ecosystems due this Friday. Details sent in email.
+                                            </p>
+                                            <p class="text-xs text-gray-400 mt-2">
+                                                Sent via WhatsApp • Yesterday
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Class Announcement -->
+                                <div class="bg-secondary-50 rounded-2xl p-4 border border-secondary-100">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="w-8 h-8 bg-secondary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-4 h-4 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-semibold text-gray-900 text-sm">Class Announcement</p>
+                                            <p class="text-gray-600 text-sm mt-1">
+                                                Field trip forms due by Monday. Please return signed permission slip.
+                                            </p>
+                                            <p class="text-xs text-gray-400 mt-2">
+                                                Sent via WhatsApp • 2 days ago
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Background Decorations -->
-                    <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-blue-200 rounded-full opacity-50 blur-3xl"></div>
-                    <div class="absolute -top-10 -left-10 w-48 h-48 bg-teal-200 rounded-full opacity-50 blur-3xl"></div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Wavy Divider -->
-    <svg class="wavy-divider" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" fill-opacity="1" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,32C960,21,1056,11,1152,10.7C1248,11,1344,21,1392,26.7L1440,32L1440,60L1392,60C1344,60,1248,60,1152,60C1056,60,960,60,864,60C768,60,672,60,576,60C480,60,384,60,288,60C192,60,96,60,48,60L0,60Z"></path></svg>
 
     <!-- Problem Section -->
-    <section class="section-padding bg-white">
-        <div class="container-custom">
+    <section class="section-spacing bg-white">
+        <div class="container-main">
             <!-- Section Header -->
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                    The Communication Gap Hurting Student Success
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    The Communication Gap 
+                    <span class="gradient-text">Hurting Student Success</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-600 leading-relaxed">
                     Most parent communication systems create more problems than they solve. EduConnect bridges the gap with tools teachers actually want to use.
                 </p>
             </div>
@@ -306,43 +332,43 @@
             <!-- Problems Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 <!-- Problem 1 -->
-                <div class="card p-8">
-                    <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-6">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
+                <div class="card card-hover p-8">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <circle cx="12" cy="12" r="10"></circle>
                             <polyline points="12,6 12,12 16,14"></polyline>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">
                         Time-Consuming Process
                     </h3>
-                    <p class="text-gray-600">
+                    <p class="text-gray-600 leading-relaxed">
                         Teachers spend 4+ hours weekly on parent communications, taking valuable time away from lesson planning and instruction.
                     </p>
                 </div>
 
                 <!-- Problem 2 -->
-                <div class="card p-8">
-                    <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-6">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
+                <div class="card card-hover p-8">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
                             <circle cx="9" cy="7" r="4"></circle>
                             <line x1="17" y1="8" x2="22" y2="13"></line>
                             <line x1="22" y1="8" x2="17" y2="13"></line>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">
                         Parent App Fatigue
                     </h3>
-                    <p class="text-gray-600">
+                    <p class="text-gray-600 leading-relaxed">
                         Only 62% of parents download and actively use school apps, leaving a significant communication gap for crucial updates.
                     </p>
                 </div>
 
                 <!-- Problem 3 -->
-                <div class="card p-8">
-                    <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-6">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
+                <div class="card card-hover p-8">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                             <polyline points="14,2 14,8 20,8"></polyline>
                             <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -350,47 +376,62 @@
                             <polyline points="10,9 9,9 8,9"></polyline>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">
                         Tracking & Documentation
                     </h3>
-                    <p class="text-gray-600">
+                    <p class="text-gray-600 leading-relaxed">
                         Manual tracking of communication attempts is inconsistent, making it difficult to document parent engagement efforts.
                     </p>
                 </div>
             </div>
 
             <!-- Solution Section -->
-            <div class="bg-blue-600 text-white rounded-2xl p-8 md:p-12">
-                <div class="max-w-3xl mx-auto text-center">
-                    <h3 class="text-2xl md:text-3xl font-bold mb-6">
+            <div class="card bg-gradient-to-br from-primary-600 to-secondary-600 text-white p-8 lg:p-12">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h3 class="text-3xl lg:text-4xl font-bold mb-6">
                         The EduConnect Solution
                     </h3>
-                    <p class="text-xl mb-8">
+                    <p class="text-xl mb-10 leading-relaxed">
                         EduConnect automatically delivers attendance, assignment, and announcement alerts directly to parents via WhatsApp and SMS—the channels they already use daily.
                     </p>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-                        <div class="bg-blue-700/50 p-5 rounded-lg">
-                            <p class="font-semibold mb-2">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                            <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <p class="font-bold text-lg mb-2">
                                 Save 3+ Hours Weekly
                             </p>
-                            <p class="text-blue-100 text-sm">
+                            <p class="text-white/80 text-sm leading-relaxed">
                                 Automate routine communications with pre-built templates
                             </p>
                         </div>
-                        <div class="bg-blue-700/50 p-5 rounded-lg">
-                            <p class="font-semibold mb-2">
+                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                            <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <p class="font-bold text-lg mb-2">
                                 98% Parent Reach
                             </p>
-                            <p class="text-blue-100 text-sm">
+                            <p class="text-white/80 text-sm leading-relaxed">
                                 Connect via channels parents already use and check daily
                             </p>
                         </div>
-                        <div class="bg-blue-700/50 p-5 rounded-lg">
-                            <p class="font-semibold mb-2">
+                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                            <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <p class="font-bold text-lg mb-2">
                                 Complete Documentation
                             </p>
-                            <p class="text-blue-100 text-sm">
+                            <p class="text-white/80 text-sm leading-relaxed">
                                 Automatic logging of all communications for reporting
                             </p>
                         </div>
@@ -399,119 +440,120 @@
             </div>
         </div>
     </section>
-    <!-- Wavy Divider -->
-    <svg class="wavy-divider" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#f9fafb" fill-opacity="1" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,32C960,21,1056,11,1152,10.7C1248,11,1344,21,1392,26.7L1440,32L1440,60L1392,60C1344,60,1248,60,1152,60C1056,60,960,60,864,60C768,60,672,60,576,60C480,60,384,60,288,60C192,60,96,60,48,60L0,60Z"></path></svg>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
 
     <!-- Features Section -->
-    <section class="section-padding bg-gray-50">
-        <div class="container-custom">
+    <section class="section-spacing bg-gray-50">
+        <div class="container-main">
             <!-- Section Header -->
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                    Core Features That Make a Difference
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    Core Features That 
+                    <span class="gradient-text">Make a Difference</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-600 leading-relaxed">
                     EduConnect is designed with teachers in mind, focusing on what matters most: simple tools that save time and improve parent engagement.
                 </p>
             </div>
 
             <!-- Features Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
-                <div class="card group">
-                    <div class="h-2 bg-blue-600 group-hover:bg-blue-500 transition-colors duration-300"></div>
+                <div class="card card-hover group">
+                    <div class="h-1 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:from-primary-600 group-hover:to-primary-700 transition-all duration-300"></div>
                     <div class="p-8">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors duration-300">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
-                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                        <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-colors duration-300">
+                            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19h6a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">
                             Attendance Alerts
                         </h3>
-                        <p class="text-gray-600 mb-6">
+                        <p class="text-gray-600 mb-6 leading-relaxed">
                             Automatically notify parents when students are marked absent or tardy. Reduce unexcused absences and increase accountability.
                         </p>
-                        <ul class="space-y-2 text-gray-700">
+                        <ul class="space-y-3">
                             <li class="flex items-center">
-                                <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                                Real-time absence notifications
+                                <div class="w-2 h-2 bg-primary-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700 font-medium">Real-time absence notifications</span>
                             </li>
                             <li class="flex items-center">
-                                <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                                Parent reply tracking
+                                <div class="w-2 h-2 bg-primary-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700 font-medium">Parent reply tracking</span>
                             </li>
                             <li class="flex items-center">
-                                <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                                Attendance pattern insights
+                                <div class="w-2 h-2 bg-primary-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700 font-medium">Attendance pattern insights</span>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="card group">
-                    <div class="h-2 bg-orange-500 group-hover:bg-orange-400 transition-colors duration-300"></div>
+                <div class="card card-hover group">
+                    <div class="h-1 bg-gradient-to-r from-orange-500 to-orange-600 group-hover:from-orange-600 group-hover:to-orange-700 transition-all duration-300"></div>
                     <div class="p-8">
-                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-orange-200 transition-colors duration-300">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
+                        <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-orange-200 transition-colors duration-300">
+                            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                 <line x1="16" y1="2" x2="16" y2="6"></line>
                                 <line x1="8" y1="2" x2="8" y2="6"></line>
                                 <line x1="3" y1="10" x2="21" y2="10"></line>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">
                             Assignment Notifications
                         </h3>
-                        <p class="text-gray-600 mb-6">
+                        <p class="text-gray-600 mb-6 leading-relaxed">
                             Send reminders about upcoming assignments and project due dates. Help students stay on track and parents stay informed.
                         </p>
-                        <ul class="space-y-2 text-gray-700">
+                        <ul class="space-y-3">
                             <li class="flex items-center">
-                                <span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
-                                Automated due date reminders
+                                <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700 font-medium">Automated due date reminders</span>
                             </li>
                             <li class="flex items-center">
-                                <span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
-                                Custom reminder schedules
+                                <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700 font-medium">Custom reminder schedules</span>
                             </li>
                             <li class="flex items-center">
-                                <span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
-                                Missing assignment alerts
+                                <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700 font-medium">Missing assignment alerts</span>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="card group">
-                    <div class="h-2 bg-teal-500 group-hover:bg-teal-400 transition-colors duration-300"></div>
+                <div class="card card-hover group">
+                    <div class="h-1 bg-gradient-to-r from-secondary-500 to-secondary-600 group-hover:from-secondary-600 group-hover:to-secondary-700 transition-all duration-300"></div>
                     <div class="p-8">
-                        <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-teal-200 transition-colors duration-300">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-500">
-                                <path d="M3 21l19-9L3 3v7l15 2-15 2v7z"></path>
+                        <div class="w-16 h-16 bg-secondary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-secondary-200 transition-colors duration-300">
+                            <svg class="w-8 h-8 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">
                             Class Announcements
                         </h3>
-                        <p class="text-gray-600 mb-6">
+                        <p class="text-gray-600 mb-6 leading-relaxed">
                             Share important updates about events, schedule changes, and other class announcements with all parents simultaneously.
                         </p>
-                        <ul class="space-y-2 text-gray-700">
+                        <ul class="space-y-3">
                             <li class="flex items-center">
-                                <span class="w-2 h-2 bg-teal-500 rounded-full mr-2"></span>
-                                One-click class communication
+                                <div class="w-2 h-2 bg-secondary-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700 font-medium">One-click class communication</span>
                             </li>
                             <li class="flex items-center">
-                                <span class="w-2 h-2 bg-teal-500 rounded-full mr-2"></span>
-                                Scheduled future announcements
+                                <div class="w-2 h-2 bg-secondary-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700 font-medium">Scheduled future announcements</span>
                             </li>
                             <li class="flex items-center">
-                                <span class="w-2 h-2 bg-teal-500 rounded-full mr-2"></span>
-                                Template library for quick sending
+                                <div class="w-2 h-2 bg-secondary-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700 font-medium">Template library for quick sending</span>
                             </li>
                         </ul>
                     </div>
@@ -520,83 +562,86 @@
         </div>
     </section>
 
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
     <!-- How It Works Section -->
-    <section class="section-padding bg-white">
-        <div class="container-custom">
+    <section id="how-it-works" class="section-spacing bg-white">
+        <div class="container-main">
             <!-- Section Header -->
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                    How EduConnect Works
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    How EduConnect 
+                    <span class="gradient-text">Works</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-600 leading-relaxed">
                     Get started in minutes with our simple three-step process
                 </p>
             </div>
 
             <!-- Steps -->
-            <div class="relative">
+            <div class="relative max-w-5xl mx-auto">
                 <!-- Connection Line -->
-                <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-blue-200 -translate-y-1/2 z-0"></div>
+                <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-primary-200 via-primary-300 to-secondary-200 -translate-y-1/2 z-0"></div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 relative z-10">
                     <!-- Step 1 -->
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        <div class="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center mb-6 shadow-large">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                             </svg>
                         </div>
-                        <div class="bg-white p-6 rounded-xl shadow-md w-full">
-                            <h3 class="text-2xl font-semibold text-gray-900 mb-3">
+                        <div class="card p-8 w-full">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">
                                 Connect
                             </h3>
-                            <p class="text-gray-600">
+                            <p class="text-gray-600 leading-relaxed">
                                 Link your student information system (SIS) with EduConnect. Works with PowerSchool, Infinite Campus, and more.
                             </p>
                         </div>
-                        <div class="mt-4 inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-semibold">
+                        <div class="mt-6 w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-medium">
                             1
                         </div>
                     </div>
 
                     <!-- Step 2 -->
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-                                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
+                        <div class="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center mb-6 shadow-large">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
                         </div>
-                        <div class="bg-white p-6 rounded-xl shadow-md w-full">
-                            <h3 class="text-2xl font-semibold text-gray-900 mb-3">
+                        <div class="card p-8 w-full">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">
                                 Configure
                             </h3>
-                            <p class="text-gray-600">
+                            <p class="text-gray-600 leading-relaxed">
                                 Set up your communication preferences and choose which alerts to automate. Customize templates to match your voice.
                             </p>
                         </div>
-                        <div class="mt-4 inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-semibold">
+                        <div class="mt-6 w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-medium">
                             2
                         </div>
                     </div>
 
                     <!-- Step 3 -->
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        <div class="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center mb-6 shadow-large">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                             </svg>
                         </div>
-                        <div class="bg-white p-6 rounded-xl shadow-md w-full">
-                            <h3 class="text-2xl font-semibold text-gray-900 mb-3">
+                        <div class="card p-8 w-full">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">
                                 Communicate
                             </h3>
-                            <p class="text-gray-600">
+                            <p class="text-gray-600 leading-relaxed">
                                 Let EduConnect handle routine communications automatically while you focus on teaching. Send manual messages anytime.
                             </p>
                         </div>
-                        <div class="mt-4 inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-semibold">
+                        <div class="mt-6 w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-medium">
                             3
                         </div>
                     </div>
@@ -605,7 +650,7 @@
 
             <!-- Bottom CTA -->
             <div class="mt-16 text-center">
-                <p class="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
+                <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
                     EduConnect adapts to your existing workflows. No need to learn complex new systems or change how you teach.
                 </p>
                 <a href="#early-access" class="btn-primary">
@@ -615,75 +660,108 @@
         </div>
     </section>
 
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
     <!-- Early Access Form Section -->
-    <section id="early-access" class="section-padding bg-blue-50">
-        <div class="container-custom">
+    <section id="early-access" class="section-spacing bg-gradient-to-br from-primary-50 via-white to-secondary-50">
+        <div class="container-main">
             <!-- Section Header -->
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                    Get Early Access
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    Get 
+                    <span class="gradient-text">Early Access</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                <p class="text-xl text-gray-600 leading-relaxed">
                     Join educators across the country who are transforming parent communication. Limited spots available for the 2025 school year.
                 </p>
             </div>
 
             <!-- Success Message -->
-            <div id="success-message" class="success-message bg-white rounded-xl shadow-lg p-8 max-w-md mx-auto text-center">
-                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                        <polyline points="22,4 12,14.01 9,11.01"></polyline>
-                    </svg>
+            <div id="success-message" class="success-message max-w-md mx-auto">
+                <div class="card p-8 text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                        Thank You!
+                    </h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Your application for early access has been received. We'll be in touch soon with next steps.
+                    </p>
+                    <button onclick="resetForm()" class="btn-secondary">
+                        Submit another application
+                    </button>
                 </div>
-                <h3 class="text-2xl font-semibold text-gray-900 mb-3">
-                    Thank You!
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Your application for early access has been received. We'll be in touch soon with next steps.
-                </p>
-                <button onclick="resetForm()" class="text-blue-600 font-medium hover:text-blue-800 transition-colors">
-                    Submit another application
-                </button>
             </div>
 
             <!-- Form Container -->
-            <div id="form-container" class="max-w-3xl mx-auto">
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="grid grid-cols-1 md:grid-cols-5">
+            <div id="form-container" class="max-w-4xl mx-auto">
+                <div class="card overflow-hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-5">
                         <!-- Benefits Sidebar -->
-                        <div class="md:col-span-2 bg-blue-600 p-8 text-white flex items-center">
-                            <div>
-                                <h3 class="text-2xl font-semibold mb-4">
+                        <div class="lg:col-span-2 bg-gradient-to-br from-primary-600 to-secondary-600 p-8 lg:p-12 text-white flex items-center">
+                            <div class="w-full">
+                                <h3 class="text-2xl lg:text-3xl font-bold mb-8">
                                     Why Join Early?
                                 </h3>
-                                <ul class="space-y-3">
+                                <ul class="space-y-6">
                                     <li class="flex items-start">
-                                        <span class="w-5 h-5 bg-blue-400 rounded-full flex items-center justify-center mr-2 mt-1">✓</span>
-                                        <span>Priority onboarding support</span>
+                                        <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-lg">Priority onboarding support</p>
+                                            <p class="text-white/80 text-sm mt-1">Get personalized setup assistance</p>
+                                        </div>
                                     </li>
                                     <li class="flex items-start">
-                                        <span class="w-5 h-5 bg-blue-400 rounded-full flex items-center justify-center mr-2 mt-1">✓</span>
-                                        <span>20% discount for life</span>
+                                        <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-lg">20% discount for life</p>
+                                            <p class="text-white/80 text-sm mt-1">Lock in early adopter pricing</p>
+                                        </div>
                                     </li>
                                     <li class="flex items-start">
-                                        <span class="w-5 h-5 bg-blue-400 rounded-full flex items-center justify-center mr-2 mt-1">✓</span>
-                                        <span>Influence future features</span>
+                                        <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-lg">Influence future features</p>
+                                            <p class="text-white/80 text-sm mt-1">Help shape the product roadmap</p>
+                                        </div>
                                     </li>
                                     <li class="flex items-start">
-                                        <span class="w-5 h-5 bg-blue-400 rounded-full flex items-center justify-center mr-2 mt-1">✓</span>
-                                        <span>Free professional development</span>
+                                        <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-lg">Free professional development</p>
+                                            <p class="text-white/80 text-sm mt-1">Access to exclusive training sessions</p>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
 
                         <!-- Form -->
-                        <div class="md:col-span-3 p-8">
-                            <form id="early-access-form" onsubmit="handleSubmit(event)" class="space-y-4">
+                        <div class="lg:col-span-3 p-8 lg:p-12">
+                            <form id="early-access-form" onsubmit="handleSubmit(event)" class="space-y-6">
                                 <!-- Name Field -->
                                 <div>
-                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Full Name *
                                     </label>
                                     <input
@@ -692,14 +770,14 @@
                                         name="name"
                                         required
                                         class="form-input"
-                                        placeholder="Your name"
+                                        placeholder="Enter your full name"
                                     />
                                     <p id="name-error" class="error-message"></p>
                                 </div>
 
                                 <!-- School Field -->
                                 <div>
-                                    <label for="school" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="school" class="block text-sm font-semibold text-gray-700 mb-2">
                                         School Name *
                                     </label>
                                     <input
@@ -708,14 +786,14 @@
                                         name="school"
                                         required
                                         class="form-input"
-                                        placeholder="Your school"
+                                        placeholder="Enter your school name"
                                     />
                                     <p id="school-error" class="error-message"></p>
                                 </div>
 
                                 <!-- Role Field -->
                                 <div>
-                                    <label for="role" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="role" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Your Role *
                                     </label>
                                     <select
@@ -736,7 +814,7 @@
 
                                 <!-- Email Field -->
                                 <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Email Address *
                                     </label>
                                     <input
@@ -752,7 +830,7 @@
 
                                 <!-- Phone Field -->
                                 <div>
-                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
                                         Phone Number (optional)
                                     </label>
                                     <input
@@ -773,7 +851,7 @@
                                     >
                                         Request Early Access
                                     </button>
-                                    <p class="text-sm text-gray-500 mt-3 text-center">
+                                    <p class="text-sm text-gray-500 mt-4 text-center">
                                         We'll contact you within 2 business days to discuss next steps.
                                     </p>
                                 </div>
