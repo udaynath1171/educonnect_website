@@ -27,22 +27,806 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        blue: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                    },
+                    animation: {
+                        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <style>
+        @layer components {
+            .btn-primary {
+                @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg text-lg shadow-lg hover:shadow-xl transition-all duration-300;
+            }
+            
+            .btn-secondary {
+                @apply bg-white hover:bg-gray-50 text-blue-600 font-medium py-3 px-8 rounded-lg text-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-600;
+            }
+            
+            .card {
+                @apply bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+            }
+            
+            .section-padding {
+                @apply py-20;
+            }
+            
+            .container-custom {
+                @apply container mx-auto px-4;
+            }
+        }
+        
+        @layer utilities {
+            .text-gradient {
+                background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Custom animations */
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            50% {
+                opacity: .5;
+            }
+        }
+        
+        /* Form validation styles */
+        .form-input {
+            @apply w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors;
+        }
+        
+        .form-input.error {
+            @apply border-red-500;
+        }
+        
+        .error-message {
+            @apply text-red-500 text-sm mt-1;
+        }
+        
+        /* Success message styles */
+        .success-message {
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        .form-container.hide {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <div id="root"></div>
-    
-    <!-- Loading fallback -->
-    <noscript>
-        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;">
-            <div style="text-align: center; padding: 2rem;">
-                <h1 style="color: #1e40af; margin-bottom: 1rem;">EduConnect</h1>
-                <p style="color: #6b7280; margin-bottom: 1rem;">JavaScript is required to view this application.</p>
-                <p style="color: #9ca3af; font-size: 0.875rem;">Please enable JavaScript in your browser settings.</p>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-50 to-blue-100 overflow-hidden">
+        <div class="container-custom py-16 md:py-24 lg:py-28">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Left Content -->
+                <div class="flex-1 space-y-6 text-center lg:text-left">
+                    <!-- Early Access Badge -->
+                    <div class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800 border border-blue-200 mb-4">
+                        <span class="animate-pulse mr-2">●</span>
+                        Now in Early Access
+                    </div>
+                    
+                    <!-- Main Heading -->
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                        Keep Parents in the Loop—Without the Extra Work
+                    </h1>
+                    
+                    <!-- Subtitle -->
+                    <p class="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto lg:mx-0">
+                        EduConnect uses WhatsApp (and SMS fallback) so teachers send Attendance, Assignment & Announcement alerts in seconds—no parent app needed.
+                    </p>
+                    
+                    <!-- CTA Button -->
+                    <div class="pt-4">
+                        <a href="#early-access" class="btn-primary inline-flex items-center group">
+                            Get Early Access
+                            <svg class="ml-2 group-hover:translate-x-1 transition-transform duration-300" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12,5 19,12 12,19"></polyline>
+                            </svg>
+                        </a>
+                        <p class="text-sm text-gray-500 mt-3">
+                            Limited spots available for 2025 school year
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Right Content - Demo Card -->
+                <div class="flex-1 relative">
+                    <div class="relative z-10 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
+                        <!-- Header -->
+                        <div class="bg-blue-600 text-white p-4">
+                            <div class="flex items-center">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                                <span class="ml-2 font-medium">EduConnect</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Messages -->
+                        <div class="p-6 space-y-6">
+                            <!-- Attendance Alert -->
+                            <div class="bg-blue-50 rounded-lg p-4">
+                                <div class="flex items-start gap-3">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 mt-1">
+                                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Attendance Alert</p>
+                                        <p class="text-sm text-gray-600 mt-1">
+                                            Emma was marked absent today in Math class. Please reply if this was planned.
+                                        </p>
+                                        <p class="text-xs text-gray-400 mt-2">
+                                            Sent via WhatsApp • 9:15 AM
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Assignment Due -->
+                            <div class="bg-orange-50 rounded-lg p-4">
+                                <div class="flex items-start gap-3">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600 mt-1">
+                                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Assignment Due</p>
+                                        <p class="text-sm text-gray-600 mt-1">
+                                            Science project on Ecosystems due this Friday. Details sent in email.
+                                        </p>
+                                        <p class="text-xs text-gray-400 mt-2">
+                                            Sent via WhatsApp • Yesterday
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Class Announcement -->
+                            <div class="bg-teal-50 rounded-lg p-4">
+                                <div class="flex items-start gap-3">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600 mt-1">
+                                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Class Announcement</p>
+                                        <p class="text-sm text-gray-600 mt-1">
+                                            Field trip forms due by Monday. Please return signed permission slip.
+                                        </p>
+                                        <p class="text-xs text-gray-400 mt-2">
+                                            Sent via WhatsApp • 2 days ago
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Background Decorations -->
+                    <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-blue-200 rounded-full opacity-50 blur-3xl"></div>
+                    <div class="absolute -top-10 -left-10 w-48 h-48 bg-teal-200 rounded-full opacity-50 blur-3xl"></div>
+                </div>
             </div>
         </div>
-    </noscript>
-    
-    <!-- Development Script -->
-    <script type="module" src="/src/main.jsx"></script>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section-padding bg-white">
+        <div class="container-custom">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    The Communication Gap Hurting Student Success
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Most parent communication systems create more problems than they solve. EduConnect bridges the gap with tools teachers actually want to use.
+                </p>
+            </div>
+
+            <!-- Problems Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- Problem 1 -->
+                <div class="card p-8">
+                    <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12,6 12,12 16,14"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        Time-Consuming Process
+                    </h3>
+                    <p class="text-gray-600">
+                        Teachers spend 4+ hours weekly on parent communications, taking valuable time away from lesson planning and instruction.
+                    </p>
+                </div>
+
+                <!-- Problem 2 -->
+                <div class="card p-8">
+                    <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <line x1="17" y1="8" x2="22" y2="13"></line>
+                            <line x1="22" y1="8" x2="17" y2="13"></line>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        Parent App Fatigue
+                    </h3>
+                    <p class="text-gray-600">
+                        Only 62% of parents download and actively use school apps, leaving a significant communication gap for crucial updates.
+                    </p>
+                </div>
+
+                <!-- Problem 3 -->
+                <div class="card p-8">
+                    <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10,9 9,9 8,9"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        Tracking & Documentation
+                    </h3>
+                    <p class="text-gray-600">
+                        Manual tracking of communication attempts is inconsistent, making it difficult to document parent engagement efforts.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Solution Section -->
+            <div class="bg-blue-600 text-white rounded-2xl p-8 md:p-12">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6">
+                        The EduConnect Solution
+                    </h3>
+                    <p class="text-xl mb-8">
+                        EduConnect automatically delivers attendance, assignment, and announcement alerts directly to parents via WhatsApp and SMS—the channels they already use daily.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                        <div class="bg-blue-700/50 p-5 rounded-lg">
+                            <p class="font-semibold mb-2">
+                                Save 3+ Hours Weekly
+                            </p>
+                            <p class="text-blue-100 text-sm">
+                                Automate routine communications with pre-built templates
+                            </p>
+                        </div>
+                        <div class="bg-blue-700/50 p-5 rounded-lg">
+                            <p class="font-semibold mb-2">
+                                98% Parent Reach
+                            </p>
+                            <p class="text-blue-100 text-sm">
+                                Connect via channels parents already use and check daily
+                            </p>
+                        </div>
+                        <div class="bg-blue-700/50 p-5 rounded-lg">
+                            <p class="font-semibold mb-2">
+                                Complete Documentation
+                            </p>
+                            <p class="text-blue-100 text-sm">
+                                Automatic logging of all communications for reporting
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section-padding bg-gray-50">
+        <div class="container-custom">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Core Features That Make a Difference
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    EduConnect is designed with teachers in mind, focusing on what matters most: simple tools that save time and improve parent engagement.
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="card group">
+                    <div class="h-2 bg-blue-600 group-hover:bg-blue-500 transition-colors duration-300"></div>
+                    <div class="p-8">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors duration-300">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+                            Attendance Alerts
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            Automatically notify parents when students are marked absent or tardy. Reduce unexcused absences and increase accountability.
+                        </p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
+                                Real-time absence notifications
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
+                                Parent reply tracking
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
+                                Attendance pattern insights
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="card group">
+                    <div class="h-2 bg-orange-500 group-hover:bg-orange-400 transition-colors duration-300"></div>
+                    <div class="p-8">
+                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-orange-200 transition-colors duration-300">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+                            Assignment Notifications
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            Send reminders about upcoming assignments and project due dates. Help students stay on track and parents stay informed.
+                        </p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                                Automated due date reminders
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                                Custom reminder schedules
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                                Missing assignment alerts
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="card group">
+                    <div class="h-2 bg-teal-500 group-hover:bg-teal-400 transition-colors duration-300"></div>
+                    <div class="p-8">
+                        <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-teal-200 transition-colors duration-300">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-500">
+                                <path d="M3 21l19-9L3 3v7l15 2-15 2v7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+                            Class Announcements
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            Share important updates about events, schedule changes, and other class announcements with all parents simultaneously.
+                        </p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-teal-500 rounded-full mr-2"></span>
+                                One-click class communication
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-teal-500 rounded-full mr-2"></span>
+                                Scheduled future announcements
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-teal-500 rounded-full mr-2"></span>
+                                Template library for quick sending
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section-padding bg-white">
+        <div class="container-custom">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    How EduConnect Works
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Get started in minutes with our simple three-step process
+                </p>
+            </div>
+
+            <!-- Steps -->
+            <div class="relative">
+                <!-- Connection Line -->
+                <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-blue-200 -translate-y-1/2 z-0"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-md w-full">
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-3">
+                                Connect
+                            </h3>
+                            <p class="text-gray-600">
+                                Link your student information system (SIS) with EduConnect. Works with PowerSchool, Infinite Campus, and more.
+                            </p>
+                        </div>
+                        <div class="mt-4 inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-semibold">
+                            1
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-md w-full">
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-3">
+                                Configure
+                            </h3>
+                            <p class="text-gray-600">
+                                Set up your communication preferences and choose which alerts to automate. Customize templates to match your voice.
+                            </p>
+                        </div>
+                        <div class="mt-4 inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-semibold">
+                            2
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-md w-full">
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-3">
+                                Communicate
+                            </h3>
+                            <p class="text-gray-600">
+                                Let EduConnect handle routine communications automatically while you focus on teaching. Send manual messages anytime.
+                            </p>
+                        </div>
+                        <div class="mt-4 inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-semibold">
+                            3
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="mt-16 text-center">
+                <p class="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
+                    EduConnect adapts to your existing workflows. No need to learn complex new systems or change how you teach.
+                </p>
+                <a href="#early-access" class="btn-primary">
+                    Schedule a Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Early Access Form Section -->
+    <section id="early-access" class="section-padding bg-blue-50">
+        <div class="container-custom">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Get Early Access
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Join educators across the country who are transforming parent communication. Limited spots available for the 2025 school year.
+                </p>
+            </div>
+
+            <!-- Success Message -->
+            <div id="success-message" class="success-message bg-white rounded-xl shadow-lg p-8 max-w-md mx-auto text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22,4 12,14.01 9,11.01"></polyline>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-900 mb-3">
+                    Thank You!
+                </h3>
+                <p class="text-gray-600 mb-6">
+                    Your application for early access has been received. We'll be in touch soon with next steps.
+                </p>
+                <button onclick="resetForm()" class="text-blue-600 font-medium hover:text-blue-800 transition-colors">
+                    Submit another application
+                </button>
+            </div>
+
+            <!-- Form Container -->
+            <div id="form-container" class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-5">
+                        <!-- Benefits Sidebar -->
+                        <div class="md:col-span-2 bg-blue-600 p-8 text-white flex items-center">
+                            <div>
+                                <h3 class="text-2xl font-semibold mb-4">
+                                    Why Join Early?
+                                </h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <span class="w-5 h-5 bg-blue-400 rounded-full flex items-center justify-center mr-2 mt-1">✓</span>
+                                        <span>Priority onboarding support</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="w-5 h-5 bg-blue-400 rounded-full flex items-center justify-center mr-2 mt-1">✓</span>
+                                        <span>20% discount for life</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="w-5 h-5 bg-blue-400 rounded-full flex items-center justify-center mr-2 mt-1">✓</span>
+                                        <span>Influence future features</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="w-5 h-5 bg-blue-400 rounded-full flex items-center justify-center mr-2 mt-1">✓</span>
+                                        <span>Free professional development</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Form -->
+                        <div class="md:col-span-3 p-8">
+                            <form id="early-access-form" onsubmit="handleSubmit(event)" class="space-y-4">
+                                <!-- Name Field -->
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Full Name *
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        required
+                                        class="form-input"
+                                        placeholder="Your name"
+                                    />
+                                    <p id="name-error" class="error-message"></p>
+                                </div>
+
+                                <!-- School Field -->
+                                <div>
+                                    <label for="school" class="block text-sm font-medium text-gray-700 mb-1">
+                                        School Name *
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="school"
+                                        name="school"
+                                        required
+                                        class="form-input"
+                                        placeholder="Your school"
+                                    />
+                                    <p id="school-error" class="error-message"></p>
+                                </div>
+
+                                <!-- Role Field -->
+                                <div>
+                                    <label for="role" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Your Role *
+                                    </label>
+                                    <select
+                                        id="role"
+                                        name="role"
+                                        required
+                                        class="form-input"
+                                    >
+                                        <option value="">Select your role</option>
+                                        <option value="Teacher">Teacher</option>
+                                        <option value="Administrator">Administrator</option>
+                                        <option value="IT Coordinator">IT Coordinator</option>
+                                        <option value="Principal">Principal</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <p id="role-error" class="error-message"></p>
+                                </div>
+
+                                <!-- Email Field -->
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Email Address *
+                                    </label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        required
+                                        class="form-input"
+                                        placeholder="your.email@school.edu"
+                                    />
+                                    <p id="email-error" class="error-message"></p>
+                                </div>
+
+                                <!-- Phone Field -->
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Phone Number (optional)
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        class="form-input"
+                                        placeholder="(123) 456-7890"
+                                    />
+                                    <p id="phone-error" class="error-message"></p>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="pt-4">
+                                    <button
+                                        type="submit"
+                                        class="w-full btn-primary"
+                                    >
+                                        Request Early Access
+                                    </button>
+                                    <p class="text-sm text-gray-500 mt-3 text-center">
+                                        We'll contact you within 2 business days to discuss next steps.
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple JavaScript for form handling -->
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Simple validation
+            const errors = {};
+            
+            if (!data.name.trim()) {
+                errors.name = 'Name is required';
+            }
+            
+            if (!data.school.trim()) {
+                errors.school = 'School name is required';
+            }
+            
+            if (!data.role) {
+                errors.role = 'Please select your role';
+            }
+            
+            if (!data.email.trim()) {
+                errors.email = 'Email is required';
+            } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+                errors.email = 'Please enter a valid email address';
+            }
+            
+            if (data.phone && !/^[\+]?[1-9][\d]{0,15}$/.test(data.phone.replace(/[\s\-\(\)]/g, ''))) {
+                errors.phone = 'Please enter a valid phone number';
+            }
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            document.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
+            
+            // Show errors if any
+            let hasErrors = false;
+            Object.keys(errors).forEach(field => {
+                const errorEl = document.getElementById(`${field}-error`);
+                const inputEl = document.getElementById(field);
+                if (errorEl && inputEl) {
+                    errorEl.textContent = errors[field];
+                    inputEl.classList.add('error');
+                    hasErrors = true;
+                }
+            });
+            
+            if (!hasErrors) {
+                // Here you would typically send the data to your backend
+                console.log('Form submitted:', data);
+                
+                // Show success message
+                document.getElementById('success-message').classList.add('show');
+                document.getElementById('form-container').classList.add('hide');
+            }
+        }
+        
+        function resetForm() {
+            // Reset form
+            document.getElementById('early-access-form').reset();
+            
+            // Clear errors
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            document.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
+            
+            // Hide success message and show form
+            document.getElementById('success-message').classList.remove('show');
+            document.getElementById('form-container').classList.remove('hide');
+        }
+    </script>
 </body>
 </html>
