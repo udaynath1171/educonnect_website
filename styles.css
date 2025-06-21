@@ -253,8 +253,8 @@ p {
 }
 
 .message-icon {
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -275,8 +275,8 @@ p {
 }
 
 .message-icon svg {
-    width: 12px !important;
-    height: 12px !important;
+    width: 8px !important;
+    height: 8px !important;
 }
 
 .message.attendance .message-icon svg {
@@ -715,8 +715,8 @@ svg {
 }
 
 .message-icon svg {
-    width: 12px !important;
-    height: 12px !important;
+    width: 8px !important;
+    height: 8px !important;
 }
 
 .benefit-check svg {
