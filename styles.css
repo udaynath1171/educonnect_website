@@ -183,8 +183,8 @@ p {
 }
 
 .demo-avatar {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     background: #3b82f6;
     border-radius: 50%;
     display: flex;
@@ -193,31 +193,31 @@ p {
 }
 
 .demo-avatar svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     color: white;
 }
 
 .demo-info h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin: 0;
     color: #1f2937;
 }
 
 .demo-info p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #6b7280;
     margin: 0;
 }
 
 .demo-status {
     display: flex;
-    gap: 4px;
+    gap: 3px;
 }
 
 .demo-status span {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     background: #10b981;
     border-radius: 50%;
 }
@@ -253,8 +253,8 @@ p {
 }
 
 .message-icon {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -275,8 +275,8 @@ p {
 }
 
 .message-icon svg {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
 }
 
 .message.attendance .message-icon svg {
@@ -359,32 +359,32 @@ p {
 }
 
 .benefit-icon {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 16px;
+    margin: 0 auto 12px;
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .benefit-icon svg {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     color: white;
 }
 
 .benefit-card h3 {
     color: white;
-    font-size: 1.1rem;
-    margin-bottom: 8px;
+    font-size: 1rem;
+    margin-bottom: 6px;
 }
 
 .benefit-card p {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin: 0;
 }
 
@@ -395,10 +395,10 @@ p {
 }
 
 .feature-icon {
-    width: 80px;
-    height: 80px;
+    width: 48px;
+    height: 48px;
     background: #f1f5f9;
-    border-radius: 20px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -407,8 +407,8 @@ p {
 }
 
 .feature-icon svg {
-    width: 40px;
-    height: 40px;
+    width: 24px;
+    height: 24px;
     color: #3b82f6;
 }
 
@@ -461,8 +461,8 @@ p {
 }
 
 .step-number {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     background: #3b82f6;
     color: white;
     border-radius: 50%;
@@ -470,26 +470,27 @@ p {
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    margin: 0 auto 20px;
+    font-size: 0.9rem;
+    margin: 0 auto 16px;
     border: 3px solid white;
     box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 .step-icon {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    border-radius: 16px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 20px;
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+    margin: 0 auto 16px;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 .step-icon svg {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     color: white;
 }
 
